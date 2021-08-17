@@ -64,8 +64,17 @@ scoring_algorithms = (
     }
     )
 
-def scorer_prompt():
-    return 
+def scorer_prompt(word):
+    scorer_choice = int(input('Enter which scoring algorithm would you like to use: '))
+    if 0 <= scorer_choice <= 2:
+        if scorer_choice == 0:
+            return scoring_algorithms[0]
+        elif scorer_choice == 1:
+            return scoring_algorithms[1]
+        else:
+            return scoring_algorithms[2]
+    else:
+        scorer_prompt(word)
 
 def transform():
     return
