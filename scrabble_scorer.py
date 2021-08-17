@@ -46,7 +46,23 @@ def vowel_bonus_scorer(word):
 def scrabble_scorer():
     return
 
-scoring_algorithms = ()
+scoring_algorithms = (
+    {
+        "name" : "Simple Score",
+        "description" : "Each letter is worth 1 point.",
+        "scoring_function" : "A function with a parameter for user input that returns a score."
+    },
+    {
+        "name" : "Bonus Vowels",
+        "description" : "Vowels are 3 pts, consonants are 1 pt.",
+        "scoring_function" : "A function that returns a score based on the number of vowels and consonants."
+    },
+    {
+        "name" : "Scrabble",
+        "description" : "The traditional scoring algorithm.",
+        "scoring_function" : "Uses the old_scrabble_scorer() function to determine the score for a given word."
+    }
+    )
 
 def scorer_prompt():
     return 
