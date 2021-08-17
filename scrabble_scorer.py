@@ -33,8 +33,15 @@ def initial_prompt():
 def simple_scorer(word):
     return len(word)
 
-def vowel_bonus_scorer():
-    return 
+def vowel_bonus_scorer(word):
+    VOWELS = 'AEIOU'
+    score = 0
+    for char in word.upper():
+        if char in VOWELS:
+            score += 3
+        else:
+            score += 1
+    return score
 
 def scrabble_scorer():
     return
