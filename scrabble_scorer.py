@@ -50,22 +50,26 @@ scoring_algorithms = (
     {
         "name" : "Simple Score",
         "description" : "Each letter is worth 1 point.",
-        "scoring_function" : "A function with a parameter for user input that returns a score."
+        "scoring_function" : "simple_scorer"
     },
     {
         "name" : "Bonus Vowels",
         "description" : "Vowels are 3 pts, consonants are 1 pt.",
-        "scoring_function" : "A function that returns a score based on the number of vowels and consonants."
+        "scoring_function" : "vowel_bonus_scorer"
     },
     {
         "name" : "Scrabble",
         "description" : "The traditional scoring algorithm.",
-        "scoring_function" : "Uses the old_scrabble_scorer() function to determine the score for a given word."
+        "scoring_function" : "scrabble_scorer"
     }
     )
 
-def scorer_prompt(word):
-    scorer_choice = int(input('Enter which scoring algorithm would you like to use: '))
+def scorer_prompt():
+    print('Which scoring algorithm would you like to use? ')
+    for index in range(len(scoring_algorithms)):
+        print(f'{index} - {scoring_algorithms[index]["name"]}: {scoring_algorithms[index]["description"]}')
+    
+    scorer_choice = int(input('Enter 0, 1, or 2: '))
     if 0 <= scorer_choice <= 2:
         if scorer_choice == 0:
             return scoring_algorithms[0]
@@ -74,12 +78,18 @@ def scorer_prompt(word):
         else:
             return scoring_algorithms[2]
     else:
-        scorer_prompt(word)
+        scorer_prompt()
 
 def transform():
     return
 
 def run_program():
     word = initial_prompt()
-    letter_points = old_scrabble_scorer(word)
-    print(letter_points)
+    algorithm_choice = scorer_prompt()
+    print(f'Algorithm Name: {algorithm_choice["name"]}')
+    
+    scorer_function = algorithm_choice["scoring_function"]
+    score = globals()[scorer_function](word)
+
+    print(f"Score for '{word}': {score}")
+    
