@@ -30,8 +30,8 @@ def initial_prompt():
     word = input("\nEnter a word to score: ")
     return word
 
-def simple_scorer():
-    return 
+def simple_scorer(word):
+    return len(word)
 
 def vowel_bonus_scorer():
     return 
