@@ -27,7 +27,8 @@ def old_scrabble_scorer(word):
 
 def is_valid_entry(entry_type, user_input):
     if entry_type == "word":
-        if len(user_input) == 0:
+        length = len(user_input) - user_input.count(' ')
+        if length == 0:
             return False
         elif len(user_input) > 0:
             for char in user_input:
