@@ -43,10 +43,10 @@ def vowel_bonus_scorer(word):
             score += 1
     return score
 
-def scrabble_scorer(new_dict, word):
+def scrabble_scorer(word):
     score = 0
     for letter in word.lower():
-        score += new_dict[letter]
+        score += new_point_structure[letter]
     return score
 
 scoring_algorithms = (
