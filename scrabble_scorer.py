@@ -43,8 +43,11 @@ def vowel_bonus_scorer(word):
             score += 1
     return score
 
-def scrabble_scorer():
-    return
+def scrabble_scorer(new_dict, word):
+    score = 0
+    for letter in word.lower():
+        score += new_dict[letter]
+    return score
 
 scoring_algorithms = (
     {
@@ -60,7 +63,7 @@ scoring_algorithms = (
     {
         "name" : "Scrabble",
         "description" : "The traditional scoring algorithm.",
-        "scoring_function" : "old_scrabble_scorer"
+        "scoring_function" : "scrabble_scorer"
     }
     )
 
