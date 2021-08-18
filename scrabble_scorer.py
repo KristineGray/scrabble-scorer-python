@@ -31,7 +31,7 @@ def is_valid_entry(entry_type, user_input):
             return False
         elif len(user_input) > 0:
             for char in user_input:
-                if char.isalpha() != True:
+                if char.isalpha() != True and char != ' ':
                     return False
         else:
             return True
@@ -51,7 +51,7 @@ def initial_prompt():
     return word
 
 def simple_scorer(word):
-    return len(word)
+    return len(word) - word.count(' ')
 
 def vowel_bonus_scorer(word):
     VOWELS = 'AEIOU'
@@ -106,7 +106,7 @@ def scorer_prompt():
         return scoring_algorithms[2]
 
 def transform(old_dict):
-    new_dict = {}
+    new_dict = { ' ' : 0 }
     for (key, value) in old_dict.items():
         for letter in value:
             new_dict[letter.lower()] = key
