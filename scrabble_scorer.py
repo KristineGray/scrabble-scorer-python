@@ -60,7 +60,7 @@ scoring_algorithms = (
     {
         "name" : "Scrabble",
         "description" : "The traditional scoring algorithm.",
-        "scoring_function" : "scrabble_scorer"
+        "scoring_function" : "old_scrabble_scorer"
     }
     )
 
@@ -80,8 +80,14 @@ def scorer_prompt():
     else:
         scorer_prompt()
 
-def transform():
-    return
+def transform(old_dict):
+    new_dict = {}
+    for (key, value) in old_dict.items():
+        for letter in value:
+            new_dict[letter.lower()] = key
+    return new_dict
+
+new_point_structure = transform(OLD_POINT_STRUCTURE)
 
 def run_program():
     word = initial_prompt()
