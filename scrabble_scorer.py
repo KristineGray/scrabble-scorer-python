@@ -33,13 +33,9 @@ def is_valid_entry(entry_type, user_input):
             for char in user_input:
                 if char.isalpha() != True and char != ' ':
                     return False
-        else:
-            return True
     elif entry_type == "number":
         if user_input not in ["0", "1", "2"]:
             return False
-        else:
-            return True
 
 def initial_prompt():
     print("Let's play some Scrabble!\n")
@@ -59,7 +55,7 @@ def vowel_bonus_scorer(word):
     for char in word.upper():
         if char in VOWELS:
             score += 3
-        else:
+        elif char.isalpha():
             score += 1
     return score
 
