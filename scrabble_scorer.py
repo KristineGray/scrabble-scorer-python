@@ -25,9 +25,29 @@ def old_scrabble_scorer(word):
 # your job is to finish writing these functions and variables that we've named
 # don't change the names or your program won't work as expected.
 
+def is_valid_entry(entry_type, user_input):
+    if entry_type == "word":
+        if len(user_input) == 0:
+            return False
+        elif len(user_input) > 0:
+            for char in user_input:
+                if char.isalpha() != True:
+                    return False
+        else:
+            return True
+    elif entry_type == "number":
+        if user_input not in ["0", "1", "2"]:
+            return False
+        else:
+            return True
+
 def initial_prompt():
     print("Let's play some Scrabble!\n")
     word = input("\nEnter a word to score: ")
+    is_valid_word = is_valid_entry("word", word)
+    while is_valid_word == False:
+        word = input("\nEnter a word to score: ")
+        is_valid_word = is_valid_entry("word", word)
     return word
 
 def simple_scorer(word):
@@ -72,16 +92,18 @@ def scorer_prompt():
     for index in range(len(scoring_algorithms)):
         print(f'{index} - {scoring_algorithms[index]["name"]}: {scoring_algorithms[index]["description"]}')
     
-    scorer_choice = int(input('Enter 0, 1, or 2: '))
-    if 0 <= scorer_choice <= 2:
-        if scorer_choice == 0:
-            return scoring_algorithms[0]
-        elif scorer_choice == 1:
-            return scoring_algorithms[1]
-        else:
-            return scoring_algorithms[2]
+    scorer_choice_str = input('Enter 0, 1, or 2: ')
+    is_valid_num = is_valid_entry("number", scorer_choice_str)
+    while is_valid_num == False:
+        scorer_choice_str = input('Enter 0, 1, or 2: ')
+        is_valid_num = is_valid_entry("number", scorer_choice_str)
+    scorer_choice = int(scorer_choice_str)
+    if scorer_choice == 0:
+        return scoring_algorithms[0]
+    elif scorer_choice == 1:
+        return scoring_algorithms[1]
     else:
-        scorer_prompt()
+        return scoring_algorithms[2]
 
 def transform(old_dict):
     new_dict = {}
